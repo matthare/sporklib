@@ -27,7 +27,7 @@ def print_summary(classic_fpid_list,spork_fpid_list,classic_dict,spork_dict):
     print str(classic_ctr) + " are newer on Classic"
     print str(len(in_classic_not_spork)) + " FPIDs Unique to Classic"
     print str(len(in_spork_not_classic)) + " FPIDs Unique to Spork"
-    print in_spork_not_classic
+    #print in_spork_not_classic
 
 
 ################################
@@ -37,7 +37,8 @@ def print_summary(classic_fpid_list,spork_fpid_list,classic_dict,spork_dict):
 ################################
 # open the file from CLassic and read in the FPIDs
 # remove none FPID chars
-f = open('./booklist.txt', 'r')
+f = open('./hugelist.txt', 'r')
+#f = open('./booklist.txt', 'r')
 fpid_dict = {}
 classic_dict = {}
 classic_fpid_list = []
@@ -98,11 +99,11 @@ for item in spork_set:
         print "ERROR: Item in Set but not in any Dictionary!"
         
 ################################
-#print "------- Summary --------"
-#print_summary(classic_fpid_list,spork_list,classic_dict,spork_dict)
+print "------- Summary --------"
+print_summary(classic_fpid_list,spork_list,classic_dict,spork_dict)
 print "------- Epub Summary --------"
 print_summary(classic_fpid_list,spork_epub_fpid_list,classic_dict,spork_epub_dict)
-#print "------- Pdf Summary --------"
-#print_summary(classic_fpid_list,spork_pdf_fpid_list,classic_dict,spork_pdf_dict)
-#print "------- DocBook Summary --------"
-#print_summary(classic_fpid_list,spork_db_fpid_list,classic_dict,spork_db_dict)
+print "------- Pdf Summary --------"
+print_summary(classic_fpid_list,spork_pdf_fpid_list,classic_dict,spork_pdf_dict)
+print "------- DocBook Summary --------"
+print_summary(classic_fpid_list,spork_db_fpid_list,classic_dict,spork_db_dict)

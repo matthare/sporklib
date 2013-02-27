@@ -31,6 +31,7 @@ for item in errr_path_list:
     file_name = os.path.split(item)[1]
     if file_name in clean_list:
         print "A " + item
+        #os.remove(item)
     elif file_name in warn_list:
         print "B " + item
     elif file_name in erra_list:

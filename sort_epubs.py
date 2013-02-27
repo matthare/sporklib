@@ -20,21 +20,23 @@ ignore_dirs.append(os.path.join(BASE_DIR,'error/reject'))
 f = open('/home/content/uploaded/epubcheck-3.0/justerror.log', 'r')
 
 file_moved = []
-for line in f:
+for line in f:    
     error = line.rsplit(':',10)
     file_error = error[1].rsplit('/',10)
-    file_name = file_error[2]
+    for item in file_error:
+        if item.endswith('.epub'):
+            file_name = item
 
     file1 = os.path.join(BASE_DIR,file_name)
     file2 = os.path.join(ERROR_DIR,file_name)
 
     if file1 not in file_moved:
         if os.path.exists(file1):
-            print "Moving " + file1 + " to " + file2
-            shutil.move(file1,file2)
+            print "Moving E " + file1 + " to " + file2
+            #shutil.move(file1,file2)
             file_moved.append(file1)
         else:
-            print "File " + file1 + " does not exists"
+            print "E File " + file1 + " does not exists"
 f.close()
 
 #####################################################
@@ -43,20 +45,22 @@ f.close()
 f = open('/home/content/uploaded/epubcheck-3.0/justwarning.log', 'r')
 
 for line in f:
-    error = line.rsplit(':',10)
-    file_error = error[1].rsplit('/',10)
-    file_name = file_error[2]
+    warn = line.rsplit(':',10)
+    file_warn = warn[1].rsplit('/',10)
+    for item in file_warn:
+        if item.endswith('.epub'):
+            file_name = item
 
     file1 = os.path.join(BASE_DIR,file_name)
     file2 = os.path.join(WARN_DIR,file_name)
 
     if file1 not in file_moved:
         if os.path.exists(file1):
-            print "Moving " + file1 + " to " + file2
-            shutil.move(file1,file2)
+            print "Moving W " + file1 + " to " + file2
+            #shutil.move(file1,file2)
             file_moved.append(file1)
         else:
-            print "File " + file1 + " does not exists"
+            print "W File " + file1 + " does not exists"
 f.close()
 
 #####################################################
@@ -77,7 +81,7 @@ for fpid in in_doc_not_epub_set:
     file2 = os.path.join(CLEAN_DIR,file_name)
     if not os.path.exists(file2):
         print "Moving New " + file1 + " to " + file2
-        shutil.move(file1,file2)
+        #shutil.move(file1,file2)
     else:
         print "File " + file2 + " already exists"
 
@@ -94,6 +98,6 @@ for fpid in in_doc_and_epub_set:
     else:
         file3 = os.path.join('/home/content/uploaded/oldbooks',file_name)
 
-    print "Moving " + file1 + " to " + file3
+    print "Moving Newer " + file1 + " to " + file3
     #shutil.move(file1,file3)
 
