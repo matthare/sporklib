@@ -20,7 +20,7 @@ def get_fpid_list(base_dir,ignore_dirs):
         else:
             print "This file name does not conform to FPID format: " + fpid
     myfpid_list.sort()
-    return myfpid_list, mydict
+    return mylist, myfpid_list, mydict
 
 
 def get_query_list(file_name = './querylist.txt'): 

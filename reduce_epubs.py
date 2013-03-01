@@ -34,8 +34,10 @@ for item in errr_path_list:
         #os.remove(item)
     elif file_name in warn_list:
         print "B " + item
+        #os.remove(item)
     elif file_name in erra_list:
         print "C " + item
+        #os.remove(item)
 
 for item in erra_path_list:
     file_name = os.path.split(item)[1]
@@ -44,8 +46,10 @@ for item in erra_path_list:
         #os.remove(item)
     elif file_name in warn_list:
         print "E " + item
+        #os.remove(item)
 
 for item in warn_path_list:
     file_name = os.path.split(item)[1]
     if file_name in clean_list:
         print "F " + item
+        #os.remove(item)

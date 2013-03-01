@@ -10,13 +10,10 @@ GOOD_DIR = "/home/content/uploaded/pdfs/goodfiles"
 
 ignore_dirs = [BAD_DIR,GOOD_DIR]
 
-dir_list = []
 file_list = []
 
 for dirpath, dirnames, filenames in os.walk(BASE_DIR):
     if dirpath not in ignore_dirs:
-        for dirs in dirnames:
-            dir_list.append(dirs)
         for files in filenames:
             file_list.append(os.path.join(dirpath,files))
 
@@ -33,6 +30,7 @@ for files in file_list:
     counter += 1
 
     if ext == '.pdf':
+        print "trying " + files
         try:
             file1 = open(files, "rb")
             doc = PdfFileReader(file1)

@@ -15,9 +15,9 @@ ignore_dirs.append(os.path.join(BASE_DIR,'pdf_dbook'))
 ignore_dirs.append(os.path.join(BASE_DIR,'epub_dbook'))
 ignore_dirs.append(os.path.join(BASE_DIR,'epub_pdf_dbook'))
 
-file_FPID_list , file_dict = sporklib.get_fpid_list(BASE_DIR,ignore_dirs)
-epub_FPID_list , epub_dict = sporklib.get_fpid_list(EPUB_DIR,ignore_dirs)
-pdf_FPID_list , pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
+-, file_FPID_list , file_dict = sporklib.get_fpid_list(BASE_DIR,ignore_dirs)
+-, epub_FPID_list , epub_dict = sporklib.get_fpid_list(EPUB_DIR,ignore_dirs)
+-, pdf_FPID_list , pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
 
 doc_set = set(file_FPID_list)
 epub_set = set(epub_FPID_list)

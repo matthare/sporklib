@@ -2,7 +2,7 @@
 
 import os, filecmp, shutil, time
 
-BASE_DIR = "/home/content/uploaded/epubs/error/reject"
+BASE_DIR = "/home/content/uploaded/epubs/error/accept"
 
 ignore_dirs = []
 

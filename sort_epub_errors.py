@@ -19,8 +19,10 @@ error_dict = {}
 for line in f:
     error = line.rsplit(':',10)
     file_error = error[1].rsplit('/',10)
-    file_name = file_error[2]
-
+    for item in file_error:
+        if item.endswith('.epub'):
+            file_name = item
+    
     file1 = os.path.join(BASE_DIR,file_name)
 
     if file1 not in file_moved:

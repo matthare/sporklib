@@ -65,9 +65,9 @@ f.close()
 
 #####################################################
 
-epub_FPID_list , epub_dict = sporklib.get_fpid_list(CLEAN_DIR,ignore_dirs)
+_, epub_FPID_list , epub_dict = sporklib.get_fpid_list(CLEAN_DIR,ignore_dirs)
 ignore_dirs.append(CLEAN_DIR)
-file_FPID_list , file_dict = sporklib.get_fpid_list(BASE_DIR,ignore_dirs)
+-, file_FPID_list , file_dict = sporklib.get_fpid_list(BASE_DIR,ignore_dirs)
 
 doc_set = set(file_FPID_list)
 epub_set = set(epub_FPID_list)

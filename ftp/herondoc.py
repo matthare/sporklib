@@ -30,7 +30,7 @@ DATASTORE_PASSWORD = '91Jt683a'
 OUTFILE_NAME = os.path.join('heron', 'datastore_audit.csv')
 outfile = csv.writer(open(OUTFILE_NAME, 'a'))
 
-SKIPFILES = 'skipids2.txt'
+SKIPFILES = 'skipids3.txt'
 KNOWN_SKIPFILES = set()
 
 if os.path.exists(SKIPFILES):
@@ -98,7 +98,7 @@ def find_ebooks(dirname):
     conn.close()
 
 if __name__ == '__main__':
-    for listing in open('fpid.list2'):
+    for listing in open('fpid.list3'):
         dirname = listing.rstrip()
         if dirname not in KNOWN_SKIPFILES:
             find_ebooks(dirname)

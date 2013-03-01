@@ -19,20 +19,18 @@ ignore_dirs.append(os.path.join(PDF_DIR,'badfiles'))
 def summary(mylist,mystring):
     if mystring == 'Not Found':
         print "---------------------------------"
-#        for item in mylist:
-#            print "Could not find " + item 
+        for item in mylist:
+            print "Could not find " + item 
         print str(len(mylist)) + " " + mystring
     elif ' ' in mystring:
         print unichr(9615) + "--------------------------------"
-#        for item in mylist:
-#            print "Found " + item + " in " + mystring
+        for item in mylist:
+            print "Found " + item + " in " + mystring
         print unichr(8866) + unichr(10230) + "  Found " + str(len(mylist)) + " in " + mystring
-#        print unichr(8735) + "-> Found " + str(len(mylist)) + " in " + mystring
-
     else:
         print "---------------------------------"
-#        for item in mylist:
-#            print "Found " + item + " in " + mystring
+        for item in mylist:
+            print "Found " + item + " in " + mystring
         print "Found " + str(len(mylist)) + " in " + mystring
 
 ################################
@@ -41,12 +39,12 @@ query_fpid_list = sporklib.get_query_list()
 
 ################################
 
-spork_epub_fpid_list , spork_epub_dict = sporklib.get_fpid_list(EPUB_DIR,ignore_dirs)
-spork_epub_c_fpid_list , spork_epub_dict = sporklib.get_fpid_list(CLEAN_DIR,ignore_dirs)
-spork_epub_w_fpid_list , spork_epub_dict = sporklib.get_fpid_list(WARN_DIR,ignore_dirs)
-spork_epub_ea_fpid_list , spork_epub_dict = sporklib.get_fpid_list(ERRA_DIR,ignore_dirs)
-spork_pdf_fpid_list , spork_pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
-spork_db_fpid_list , spork_db_dict = sporklib.get_fpid_list(DB_DIR,ignore_dirs)
+_, spork_epub_fpid_list , spork_epub_dict = sporklib.get_fpid_list(EPUB_DIR,ignore_dirs)
+_, spork_epub_c_fpid_list , spork_epub_dict = sporklib.get_fpid_list(CLEAN_DIR,ignore_dirs)
+-, spork_epub_w_fpid_list , spork_epub_dict = sporklib.get_fpid_list(WARN_DIR,ignore_dirs)
+-, spork_epub_ea_fpid_list , spork_epub_dict = sporklib.get_fpid_list(ERRA_DIR,ignore_dirs)
+-, spork_pdf_fpid_list , spork_pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
+-, spork_db_fpid_list , spork_db_dict = sporklib.get_fpid_list(DB_DIR,ignore_dirs)
 
 ################################
 

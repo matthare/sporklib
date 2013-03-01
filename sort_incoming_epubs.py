@@ -12,9 +12,9 @@ ignore_dirs.append(os.path.join(EPUB_DIR,'error'))
 #ignore_dirs.append(os.path.join(EPUB_DIR,'error/accept'))
 ignore_dirs.append(os.path.join(EPUB_DIR,'error/reject'))
 
-incoming_FPID_list , db_dict = sporklib.get_fpid_list(BASE_DIR,ignore_dirs)
-epub_FPID_list , epub_dict = sporklib.get_fpid_list(EPUB_DIR,ignore_dirs)
-pdf_FPID_list , pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
+-, incoming_FPID_list , db_dict = sporklib.get_fpid_list(BASE_DIR,ignore_dirs)
+-, epub_FPID_list , epub_dict = sporklib.get_fpid_list(EPUB_DIR,ignore_dirs)
+-, pdf_FPID_list , pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
 
 doc_set = set(incoming_FPID_list)
 epub_set = set(epub_FPID_list)
