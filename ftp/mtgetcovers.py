@@ -22,15 +22,16 @@ import Queue, time
 
 class bcolors:
     OKBLUE = '\033[94m'
+    OKGREEN = '\033[92m'
     WARNING = '\033[93m'
     FAIL = '\033[91m'
-    OKGREEN = '\033[92m'
     ENDC = '\033[0m'
 
     def disable(self):
         self.OKBLUE = ''
         self.OKGREEN = ''
         self.WARNING = ''
+        self.FAIL = ''
         self.ENDC = ''
 
 
@@ -43,10 +44,10 @@ DATASTORE_USERNAME = 'safaridatastore'
 DATASTORE_PASSWORD = '91Jt683a'
 
 
-OUTFILE_NAME = os.path.join('out', 'datastore_audit.csv')
+OUTFILE_NAME = os.path.join('covers', 'datastore_cover_audit.csv')
 outfile = csv.writer(open(OUTFILE_NAME, 'a'))
 
-SKIPFILES = 'skipids.txt'
+SKIPFILES = 'skipcoverids.txt'
 KNOWN_SKIPFILES = set()
 
 if os.path.exists(SKIPFILES):
@@ -63,36 +64,35 @@ def find_ebooks(dirname,trdname):
     ftp_list = []
     conn.retrlines('LIST %s' % dirname, ftp_list.append)
     found_match = False
+    
+    file_type = '.png'
 
     file_list = []
     for item in ftp_list:
         filename = item.split(' ')[-1].strip()
-        if dirname in filename:
-            if filename.endswith('rewritten') or filename.endswith('epub'):
-                print bcolors.OKBLUE + trdname + bcolors.ENDC + " Got filename " + filename 
-                outfile.writerow([filename, dirname])
-                file_list.append(filename)
-                found_match = True
+        if filename == dirname + '_large' + file_type or filename == dirname + '_lrg' + file_type or filename == dirname + file_type:
+            print bcolors.OKBLUE + trdname + bcolors.ENDC + " Got filename " + filename 
+            outfile.writerow([filename, dirname])
+            file_list.append(filename)
+            found_match = True
 
     try:
         if found_match:
-            if dirname + '_backup.epub' in file_list:
-                file_name = dirname + '_backup.epub'
-            elif dirname + '.epub' in file_list:
-                file_name = dirname + '.epub'
-            elif dirname + '.epub.rewritten' in file_list:
-                file_name = dirname + '.epub.rewritten'
-            else:
-                file_name = file_list[0]
+            if dirname + '_large' + file_type in file_list:
+                file_name = dirname + '_large' + file_type
+            elif dirname + '_lrg' + file_type in file_list:
+                file_name = dirname + '_lrg' + file_type
+            elif dirname  + file_type in file_list:
+                file_name = dirname + file_type
 
-            local_filename = os.path.join('out', dirname + '.epub')
+            local_filename = os.path.join('covers', dirname + file_type)
             print bcolors.OKBLUE + trdname + bcolors.ENDC + " Saving " + file_name + " as " + local_filename
             with open(local_filename, 'w') as f:
                 conn.retrbinary('RETR ' + dirname + '/' +  file_name, lambda data: f.write(data))
             f.close()
 
         if not found_match:
-            print bcolors.OKBLUE + trdname + bcolors.ENDC + " Didn't find an EPUB for " + dirname
+            print bcolors.OKBLUE + trdname + bcolors.ENDC + " Didn't find a " + file_type + " for " + dirname
         skipfile_names.write(dirname + "\n")
         conn.close()
     except:
@@ -129,11 +129,8 @@ def process_data(threadName, q):
             queueLock.release()
         #time.sleep(1)
 
-
-
-
 if __name__ == '__main__':
-    #threadList = ["Thread-1", "Thread-2"]
+    #threadList = ["Thread-1"]
     threadList = ["Thread-1", "Thread-2","Thread-3", "Thread-4"]
     queueLock = threading.Lock()
     workQueue = Queue.Queue()
@@ -148,7 +145,7 @@ if __name__ == '__main__':
         threadID += 1
 
     queueLock.acquire()
-    for listing in open('fpid.list'):
+    for listing in open('fpidcover.list'):
         dirname = listing.rstrip()
         workQueue.put(dirname)
     queueLock.release()

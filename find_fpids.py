@@ -25,7 +25,7 @@ def summary(mylist,mystring):
     elif ' ' in mystring:
         print unichr(9615) + "--------------------------------"
         for item in mylist:
-            print "Found " + item + " in " + mystring
+            print unichr(8866) + unichr(10230) + "  Found " + item + " in " + mystring
         print unichr(8866) + unichr(10230) + "  Found " + str(len(mylist)) + " in " + mystring
     else:
         print "---------------------------------"
@@ -41,10 +41,10 @@ query_fpid_list = sporklib.get_query_list()
 
 _, spork_epub_fpid_list , spork_epub_dict = sporklib.get_fpid_list(EPUB_DIR,ignore_dirs)
 _, spork_epub_c_fpid_list , spork_epub_dict = sporklib.get_fpid_list(CLEAN_DIR,ignore_dirs)
--, spork_epub_w_fpid_list , spork_epub_dict = sporklib.get_fpid_list(WARN_DIR,ignore_dirs)
--, spork_epub_ea_fpid_list , spork_epub_dict = sporklib.get_fpid_list(ERRA_DIR,ignore_dirs)
--, spork_pdf_fpid_list , spork_pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
--, spork_db_fpid_list , spork_db_dict = sporklib.get_fpid_list(DB_DIR,ignore_dirs)
+_, spork_epub_w_fpid_list , spork_epub_dict = sporklib.get_fpid_list(WARN_DIR,ignore_dirs)
+_, spork_epub_ea_fpid_list , spork_epub_dict = sporklib.get_fpid_list(ERRA_DIR,ignore_dirs)
+_, spork_pdf_fpid_list , spork_pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
+_, spork_db_fpid_list , spork_db_dict = sporklib.get_fpid_list(DB_DIR,ignore_dirs)
 
 ################################
 
@@ -66,6 +66,7 @@ for item in query_fpid_list:
         epub_w_list.append(item)
     elif item in spork_epub_ea_fpid_list:
         epub_ea_list.append(item)
+
     elif item in spork_pdf_fpid_list:
         pdf_list.append(item)
         out_list.append(item)

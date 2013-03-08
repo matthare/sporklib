@@ -4,7 +4,7 @@ import os, filecmp, shutil, time, zipfile
 from numpy import *
 from histogram import *
 
-BASE_DIR = "/home/content/uploaded/epubs"
+BASE_DIR = "/home/content/uploaded/covers"
 
 ignore_dirs = []
 
@@ -19,7 +19,7 @@ zip_epub = []
 largest = 0
 
 hmin = 0.0
-hmax = 350000000.0
+hmax = 8000000.0
 nbins = 100
 bin_size = (hmax-hmin)/nbins
 bin_center = bin_size/2
@@ -29,7 +29,7 @@ for files in path_list:
     base = raw_base.lower()
     ext = raw_ext.lower()
 
-    if '.epub' == ext:
+    if '.jpg' == ext:
         fsize = os.path.getsize(files)
         if fsize > largest:
             largest = fsize

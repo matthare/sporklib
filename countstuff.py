@@ -8,6 +8,12 @@ OLD_DIR = "/home/content/uploaded/oldbooks"
 BAD_DIR = "/home/content/uploaded/badfiles"
 
 ignore_dirs = [DUP_DIR,OLD_DIR,BAD_DIR]
+ignore_dirs.append('/home/content/uploaded/epubs/error/reject')
+ignore_dirs.append('/home/content/uploaded/pdfs/badfiles')
+ignore_dirs.append('/home/content/uploaded/zips/badfiles')
+ignore_dirs.append('/home/content/uploaded/zips/other/other')
+ignore_dirs.append('/home/content/uploaded/zips/other/pdfs')
+ignore_dirs.append('/home/content/uploaded/zips/other/epubs')
 
 dir_list = []
 file_list = []

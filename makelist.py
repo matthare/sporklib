@@ -19,6 +19,7 @@ def print_summary(classic_fpid_list,spork_fpid_list,classic_dict,spork_dict):
     for fpid in common:
         if spork_dict[fpid] < classic_dict[fpid]:
             classic_ctr += 1
+#            print fpid
         else:
             spork_ctr += 1
             
@@ -27,7 +28,7 @@ def print_summary(classic_fpid_list,spork_fpid_list,classic_dict,spork_dict):
     print str(classic_ctr) + " are newer on Classic"
     print str(len(in_classic_not_spork)) + " FPIDs Unique to Classic"
     print str(len(in_spork_not_classic)) + " FPIDs Unique to Spork"
-    #print in_spork_not_classic
+#    print in_spork_not_classic
 
 
 ################################
@@ -76,9 +77,9 @@ classic_fpid_list.sort()
 #print fpid_dict
 
 ################################
--, spork_epub_fpid_list , spork_epub_dict = sporklib.get_fpid_list(EPUB_DIR,ignore_dirs)
--, spork_pdf_fpid_list , spork_pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
--, spork_db_fpid_list , spork_db_dict = sporklib.get_fpid_list(DB_DIR,ignore_dirs)  
+_, spork_epub_fpid_list , spork_epub_dict = sporklib.get_fpid_list(EPUB_DIR,ignore_dirs)
+_, spork_pdf_fpid_list , spork_pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
+_, spork_db_fpid_list , spork_db_dict = sporklib.get_fpid_list(DB_DIR,ignore_dirs)  
 
 spork_fpid_list = []
 spork_fpid_list.extend(spork_epub_fpid_list)

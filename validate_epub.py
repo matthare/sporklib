@@ -4,6 +4,10 @@ import os, filecmp, shutil, time
 import subprocess
 
 BASE_DIR = "/home/content/uploaded/epubs"
+REJECT_DIR = "/home/content/uploaded/epubs/error/reject"
+ACCEPT_DIR = "/home/content/uploaded/epubs/error/accept"
+WARNING_DIR = "/home/content/uploaded/epubs/warning"
+CLEAN_DIR = "/home/content/uploaded/epubs/clean"
 
 ignore_dirs = []
 ignore_dirs.append(os.path.join(BASE_DIR,'clean'))
@@ -15,7 +19,12 @@ ignore_dirs.append(os.path.join(BASE_DIR,'error/reject'))
 
 def run(cmd):
    call = ["/bin/bash", "-c", cmd]
-   ret = subprocess.call(call, stdout=f, stderr=f)
+   output = ''
+   try:
+      output = subprocess.check_output(call,stderr=subprocess.STDOUT)
+      return output   
+   except subprocess.CalledProcessError as file_error:
+      return file_error.output
 
 file_list = []
 for dirpath, dirnames, filenames in os.walk(BASE_DIR):
@@ -24,7 +33,6 @@ for dirpath, dirnames, filenames in os.walk(BASE_DIR):
             file_list.append(os.path.join(dirpath,files))
 
 counter = 0
-f = open('/home/content/uploaded/epubcheck-3.0/errorlog.txt', 'w')
 for files in file_list:
     raw_path,raw_name = os.path.split(files)
     raw_base,raw_ext = os.path.splitext(raw_name)
@@ -34,20 +42,39 @@ for files in file_list:
     counter += 1
 
     if ext == '.epub':
-       run("java -jar /home/mhare/uploaded/epubcheck-3.0/epubcheck-3.0.jar " + files)
+       output = run("java -jar /home/mhare/uploaded/epubcheck-3.0/epubcheck-3.0.jar " + files)
 
-f.close()
+       if 'ERROR:' in output:
 
-f = open('/home/content/uploaded/epubcheck-3.0/errorlog.txt', 'r')
-f1 = open('/home/content/uploaded/epubcheck-3.0/justerror.log', 'w')
-f2 = open('/home/content/uploaded/epubcheck-3.0/justwarning.log', 'w')
+          if 'I/O error' in output:
+             file2 = os.path.join(REJECT_DIR,raw_name)
+          elif 'Cannot read' in output:
+             file2 = os.path.join(REJECT_DIR,raw_name)
+          elif 'invalid LOC' in output:
+             file2 = os.path.join(REJECT_DIR,raw_name)
+          elif 'No rootfile' in output:
+             file2 = os.path.join(REJECT_DIR,raw_name)
+          elif 'Premature end' in output:
+             file2 = os.path.join(REJECT_DIR,raw_name)
+          elif 'toc attribute' in output:
+            file2 = os.path.join(REJECT_DIR,raw_name)
+          elif 'Required META-INF/container.xml' in output:
+             file2 = os.path.join(REJECT_DIR,raw_name)
+          elif 'character content' in output:
+             file2 = os.path.join(REJECT_DIR,raw_name)
+          else:
+             file2 = os.path.join(ACCEPT_DIR,raw_name)
 
-for line in f:
-   if line[:5] == "ERROR":
-      f1.write(line)
-   elif line[:5] == "WARNI":
-      f2.write(line)
-      
-f.close()
-f1.close()
-f2.close()
+       elif 'WARNING:' in output:
+          file2 = os.path.join(WARNING_DIR,raw_name)
+       else:
+          file2 = os.path.join(CLEAN_DIR,raw_name)
+
+       if not os.path.exists(files):
+          print "Error: file " + files + " does not exist"
+       elif os.path.exists(file2):
+          print "Error: file " + file2 + " already exists"
+       else:
+          print "Moving File " + files + " to " + file2
+          shutil.move(files,file2)
+

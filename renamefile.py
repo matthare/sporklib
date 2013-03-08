@@ -35,20 +35,12 @@ for files in file_list:
 
         my_str = 'si'
         if my_str in raw_base:
-            if os.path.exists(files.replace(my_str,"")):
+            if os.path.exists(files.replace(my_str,"SI")):
                 print files
-                print files.replace(my_str,"")
+                print files.replace(my_str,"SI")
             else:
-                print "Moving " + files + " to " + files.replace(my_str,"")
-                #shutil.move(files,files.replace(my_str,""))
-        my_str = 'SI'
-        if my_str in raw_base:
-            if os.path.exists(files.replace(my_str,"")):
-                print files
-                print files.replace(my_str,"")
-            else:
-                print "Moving " + files + " to " + files.replace(my_str,"")
-                #shutil.move(files,files.replace(my_str,""))
+                print "Moving " + files + " to " + files.replace(my_str,"SI")
+                #shutil.move(files,files.replace(my_str,"SI"))
 
     if ext == '.epub' or ext == '.pdf' or ext == '.jpg':
         if '-' in base:
@@ -62,8 +54,8 @@ for files in file_list:
             new_file = new_base + '.zip'
             if not os.path.exists(new_file):
                 shutil.move(files,new_file)
-        elif '_docbook' in base:
-            new_base = raw_base.rstrip('_Docbook')
+            elif '_docbook' in base:
+                new_base = raw_base.rstrip('_Docbook')
             new_file = new_base + '.zip'
             if not os.path.exists(new_file):
                 shutil.move(files,new_file)
