@@ -2,7 +2,7 @@
 
 import os, filecmp, shutil, time
 
-BASE_DIR = "/home/content/uploaded/epubs/warning"
+BASE_DIR = "/home/content/uploaded/zips/docbooks/dbs/pdf_dbook"
 
 ignore_dirs = []
 

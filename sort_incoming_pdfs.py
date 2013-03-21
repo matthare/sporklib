@@ -55,7 +55,7 @@ for fpid in in_all_set:
             ftime2 = os.path.getmtime(file2)
             
             if ftime1 > ftime2:
-                file3 = file2
+                file3 = os.path.join(PDF_DIR,file_name)
                 print "Moving New1 " + file1 + " to " + file3
                 #shutil.move(file1,file3)
             else:
@@ -91,7 +91,7 @@ for fpid in in_doc_and_pdf_only_set:
             ftime2 = os.path.getmtime(file2)
             
             if ftime1 > ftime2:
-                file3 = file2
+                file3 = os.path.join(PDF_DIR,file_name)
                 print "Moving New2 " + file1 + " to " + file3
                 #shutil.move(file1,file3)
             else:

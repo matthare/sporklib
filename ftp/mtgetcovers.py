@@ -65,7 +65,7 @@ def find_ebooks(dirname,trdname):
     conn.retrlines('LIST %s' % dirname, ftp_list.append)
     found_match = False
     
-    file_type = '.png'
+    file_type = '.jpg'
 
     file_list = []
     for item in ftp_list:

@@ -19,6 +19,19 @@ import sys
 import threading, Queue, time
 import os, filecmp, shutil
 
+class bcolors:
+    OKBLUE = '\033[94m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    OKGREEN = '\033[92m'
+    ENDC = '\033[0m'
+
+    def disable(self):
+        self.OKBLUE = ''
+        self.OKGREEN = ''
+        self.WARNING = ''
+        self.ENDC = ''
+
 logging.basicConfig()
 log = logging.getLogger(__name__)
 log.setLevel(logging.INFO)
@@ -43,21 +56,21 @@ skipfile_names = open(SKIPFILES, 'a', 0) # write the skipfiles unbuffered
 
 def deposit_ebooks(filename,trdname):
     conn = ftplib.FTP(DATASTORE, DATASTORE_USERNAME, DATASTORE_PASSWORD, '', 10)
-    conn.set_debuglevel(2)
+    conn.set_debuglevel(1)
 
     conn.cwd('heron')
 
     try:
         if os.path.exists(filename):
             fname = os.path.split(filename)[1]
-            log.info("%s Uploading %s as %s" % (trdname, filename, fname))
+            print bcolors.OKBLUE + trdname + bcolors.ENDC + " Uploading " + filename + " as " + fname 
             conn.storbinary('STOR ' + fname, open(filename, 'r'))
         else:
-            log.info("%s File %s does not exists!" % (trdname, filename))
+            print bcolors.FAIL + trdname + bcolors.ENDC + " File " + filename + " does not exists!"
         skipfile_names.write(filename + "\n")
         conn.close()
     except:
-        log.info("%s Transfer Failed %s" % (trdname, filename))
+        print bcolors.FAIL + trdname + bcolors.ENDC + " Transfer Failed " + file_name
         conn.close()
 
 exitFlag = 0
@@ -81,15 +94,14 @@ def process_data(threadName, q):
             queueLock.release()
 
             if filename not in KNOWN_SKIPFILES:
-                print "%s processing %s" % (threadName, filename)
+                print bcolors.OKBLUE + threadName + bcolors.ENDC + " Processing " + filename
                 deposit_ebooks(filename,threadName)
             else:
-                print "%s skipping %s" % (threadName, filename)
-                log.debug("Skipping %s" % filename)
+                print bcolors.OKGREEN + threadName + bcolors.ENDC + " Skipping " + filename
 
         else:
             queueLock.release()
-        time.sleep(1)
+        #time.sleep(1)
 
 
 def get_file_list():
@@ -103,8 +115,8 @@ def get_file_list():
 
 
 if __name__ == '__main__':
-    #threadList = ["Thread-1", "Thread-2"]
-    threadList = ["Thread-1", "Thread-2","Thread-3", "Thread-4"]
+    threadList = ["Thread-1", "Thread-2"]
+    #threadList = ["Thread-1", "Thread-2","Thread-3", "Thread-4"]
     queueLock = threading.Lock()
     workQueue = Queue.Queue()
     threads = []
@@ -125,6 +137,21 @@ if __name__ == '__main__':
             
     # Wait for queue to empty
     while not workQueue.empty():
+        the_time = time.time()
+        if the_time%10 <= 0.00001:
+            print bcolors.FAIL + str(time.ctime(the_time)) + " " + str(threading.active_count() - 1) + " Threads still alive." + bcolors.ENDC
+            if threading.active_count() < 5 :
+                thread_list = threads[:]
+                for thread in thread_list:
+                    if not thread.is_alive():
+                        threadID = thread.ident
+                        tName = thread.name
+                        threads.remove(thread)
+                        thread = myThread(threadID, tName, workQueue)
+                        thread.start()
+                        threads.append(thread)
+                print bcolors.FAIL + str(time.ctime(time.time())) + " " + str(threading.active_count() - 1) + " Threads still alive." + bcolors.ENDC        
+
         pass
 
     # Notify threads it's time to exit

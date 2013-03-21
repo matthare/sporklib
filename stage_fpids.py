@@ -34,7 +34,10 @@ for item in query_fpid_list:
         if item in file1:
             counter += 1
             file2 = os.path.join(STAGE_DIR,os.path.split(file1)[1])
-            print str(counter) + " Copying " + file1 + " to " + file2
-            #shutil.copy(file1,file2)
+            if os.path.exists(file2):
+                print "Already have " + file2
+            else:
+                print str(counter) + " Copying " + file1 + " to " + file2
+                shutil.copy(file1,file2)
 
 

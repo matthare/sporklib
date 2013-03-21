@@ -53,3 +53,25 @@ for item in warn_path_list:
     if file_name in clean_list:
         print "F " + item
         #os.remove(item)
+
+
+f = open('./epub_clean.list', 'w')
+for item in clean_list:
+    f.write(item.replace('.epub','') + "\n")
+f.close()
+
+f = open('./epub_warning.list', 'w')
+for item in warn_list:
+    f.write(item.replace('.epub','') + "\n")
+f.close()
+
+f = open('./epub_error_accept.list', 'w')
+for item in erra_list:
+    f.write(item.replace('.epub','') + "\n")
+f.close()
+
+f = open('./epub_error_reject.list', 'w')
+for item in errr_list:
+    f.write(item.replace('.epub','') + "\n")
+f.close()
+

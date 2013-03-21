@@ -39,6 +39,7 @@ for dirpath, dirnames, filenames in os.walk(BASE_DIR):
 
 jpg_counter = 0
 png_counter = 0
+gif_counter = 0
 bad_counter = 0
 over_counter = 0
 hmin = 0.0
@@ -88,6 +89,19 @@ for files in file_list:
           bin_value += 1
           h[pixels,pixels+0.01] = bin_value ,None
 
+    elif image_type  == 'GIF' and ext == '.gif':
+       gif_counter += 1
+       
+       if pixels > bin_number*bin_size and pixels <= (bin_number + 1)*bin_size:
+          tmb_list.append(raw_base)
+       
+       if pixels > hmax:
+          over_counter += 1
+       else:
+          bin_value = h[pixels,pixels+0.01].I 
+          bin_value += 1
+          h[pixels,pixels+0.01] = bin_value ,None
+
     else:
        print run("identify " + files)
        bad_counter += 1
@@ -108,6 +122,7 @@ print "XXXL\t" + str(over_counter)
 
 print str(jpg_counter) + " JPGs"
 print str(png_counter) + " PNGs"
+print str(gif_counter) + " GIFs"
 print str(bad_counter) + " bad files"
 print str(counter) + " total files"
 

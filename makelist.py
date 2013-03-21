@@ -28,7 +28,8 @@ def print_summary(classic_fpid_list,spork_fpid_list,classic_dict,spork_dict):
     print str(classic_ctr) + " are newer on Classic"
     print str(len(in_classic_not_spork)) + " FPIDs Unique to Classic"
     print str(len(in_spork_not_classic)) + " FPIDs Unique to Spork"
-#    print in_spork_not_classic
+#    for item in in_classic_not_spork:
+#        print item
 
 
 ################################
@@ -100,6 +101,8 @@ for item in spork_set:
         print "ERROR: Item in Set but not in any Dictionary!"
         
 ################################
+print "--------- BvD ----------"
+print len(classic_fpid_list)
 print "------- Summary --------"
 print_summary(classic_fpid_list,spork_list,classic_dict,spork_dict)
 print "------- Epub Summary --------"

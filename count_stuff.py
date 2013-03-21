@@ -88,5 +88,5 @@ print " Dcbk   = " + str(len(dbook_missing_cover_set))
 
 
 print "-----------------------------------"
-#for item in pdf_not_epub_set:
+#for item in epub_missing_cover_set:
 #    print item
