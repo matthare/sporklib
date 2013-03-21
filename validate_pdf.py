@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import os, filecmp, shutil, time
+import os, filecmp, shutil, time, math
 from pyPdf import PdfFileReader
 #from pyPDF2 import PdfFileReader 
 
@@ -20,6 +20,7 @@ for dirpath, dirnames, filenames in os.walk(BASE_DIR):
 file_dict = {}
 name_dict = {}
 ext_list = []
+num_pages = []
 counter = 0
 for files in file_list:
     raw_path,raw_name = os.path.split(files)
@@ -35,6 +36,8 @@ for files in file_list:
             file1 = open(files, "rb")
             doc = PdfFileReader(file1)
 
+            num_pages.append(doc.getNumPages())
+
             file2 = os.path.join(GOOD_DIR,raw_name)
             print "Moving " + files + " to " + file2
             shutil.move(files,file2)
@@ -45,3 +48,19 @@ for files in file_list:
             shutil.move(files,file2)
 
     file1.close()
+
+total_pages = 0
+for number in num_pages:
+    total_pages += number
+ave_pages = float(total_pages)/float(len(num_pages))
+deviation_sq_sum = 0
+for number in num_pages:
+    deviation_sq_sum += (number - ave_pages)*(number - ave_pages)
+standard_deviation = math.sqrt(float(deviation_sq_sum)/float(len(num_pages)))
+
+standard_error = standard_deviation/sqrt(len(num_pages))
+
+print "-----------------------------"
+print "Total number of PDFs {:10}".format(counter)
+print "Total Number of pages {:10}".format(total_pages)
+print "Average Number of pages {:10.1} {} {10.2}".format(ave_pages,unichr(177),standard_error)
