@@ -18,8 +18,9 @@ def get_fpid_list(base_dir,ignore_dirs):
         if lead.isdigit():
             myfpid_list.append(fpid)
         else:
+            myfpid_list.append(fpid)
             print "This file name does not conform to FPID format: " + fpid
-    myfpid_list.sort()
+    #myfpid_list.sort()
     return mylist, myfpid_list, mydict
 
 

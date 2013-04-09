@@ -8,6 +8,7 @@ REJECT_DIR = "/home/content/uploaded/epubs/error/reject"
 ACCEPT_DIR = "/home/content/uploaded/epubs/error/accept"
 WARNING_DIR = "/home/content/uploaded/epubs/warning"
 CLEAN_DIR = "/home/content/uploaded/epubs/clean"
+DUP_DIR = "/home/content/uploaded/duplicates"
 
 ignore_dirs = []
 ignore_dirs.append(os.path.join(BASE_DIR,'clean'))
@@ -42,8 +43,7 @@ for files in file_list:
     counter += 1
 
     if ext == '.epub':
-       output = run("java -jar /home/mhare/uploaded/epubcheck-3.0/epubcheck-3.0.jar " + files)
-
+       output = run("java -jar /home/mhare/sporklib/uploaded/epubcheck-3.0/epubcheck-3.0.jar " + files)
        if 'ERROR:' in output:
 
           if 'I/O error' in output:
@@ -74,6 +74,10 @@ for files in file_list:
           print "Error: file " + files + " does not exist"
        elif os.path.exists(file2):
           print "Error: file " + file2 + " already exists"
+          if filecmp.cmp(files,file2):
+             print "But both are the same, moving {} to Duplicates".format(files)
+             file2 = os.path.join(DUP_DIR,raw_name)
+             shutil.move(files,file2)
        else:
           print "Moving File " + files + " to " + file2
           shutil.move(files,file2)

@@ -55,6 +55,7 @@ for key in name_dict:
     if lead.isdigit():
         spork_fpid_list.append(key) 
     else:
+        spork_fpid_list.append(key) 
         print "This file name does not conform to FPID format: " + key
 
 

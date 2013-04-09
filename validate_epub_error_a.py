@@ -35,6 +35,6 @@ for files in file_list:
     counter += 1
 
     if ext == '.epub':
-        run("java -jar /home/mhare/uploaded/epubcheck-3.0/epubcheck-3.0.jar " + files)
+        run("java -jar /home/content/uploaded/epubcheck-3.0/epubcheck-3.0.jar " + files)
         
 f.close()

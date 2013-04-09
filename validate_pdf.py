@@ -58,9 +58,10 @@ for number in num_pages:
     deviation_sq_sum += (number - ave_pages)*(number - ave_pages)
 standard_deviation = math.sqrt(float(deviation_sq_sum)/float(len(num_pages)))
 
-standard_error = standard_deviation/sqrt(len(num_pages))
+standard_error = standard_deviation/math.sqrt(len(num_pages))
 
 print "-----------------------------"
 print "Total number of PDFs {:10}".format(counter)
 print "Total Number of pages {:10}".format(total_pages)
-print "Average Number of pages {:10.1} {} {10.2}".format(ave_pages,unichr(177),standard_error)
+print "Average Number of pages {:.4} ".format(ave_pages) + " +/- {:.4}".format(standard_error)
+

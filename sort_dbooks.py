@@ -3,8 +3,8 @@
 import os, filecmp, shutil, time
 import sporklib
 
-BASE_DIR = "/home/content/uploaded/zips/docbooks/dbs"
-#BASE_DIR = "/home/content/uploaded/zips/docbooks/pdfs"
+#BASE_DIR = "/home/content/uploaded/zips/docbooks/dbs"
+BASE_DIR = "/home/content/uploaded/zips/docbooks/pdfs"
 #BASE_DIR = "/home/content/uploaded/zips/docbooks/epubs"
 EPUB_DIR = "/home/content/uploaded/epubs"
 PDF_DIR = "/home/content/uploaded/pdfs"

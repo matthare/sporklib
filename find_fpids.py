@@ -8,6 +8,7 @@ CLEAN_DIR = "/home/content/uploaded/epubs/clean"
 WARN_DIR = "/home/content/uploaded/epubs/warning"
 ERRA_DIR = "/home/content/uploaded/epubs/error/accept"
 PDF_DIR = "/home/content/uploaded/pdfs"
+COVER_DIR = "/home/content/uploaded/covers"
 DB_DIR = "/home/content/uploaded/zips/docbooks"
 
 ignore_dirs = []
@@ -16,21 +17,24 @@ ignore_dirs.append(os.path.join(EPUB_DIR,'error'))
 ignore_dirs.append(os.path.join(EPUB_DIR,'error/reject'))
 ignore_dirs.append(os.path.join(PDF_DIR,'badfiles'))
 
-def summary(mylist,mystring):
-    if mystring == 'Not Found':
+def summary(mylist,mystring,verbose):
+    if 'Not Found' in mystring:
         print "---------------------------------"
-        for item in mylist:
-            print "Could not find " + item 
+        if verbose:
+            for item in mylist:
+                print "Could not find " + item 
         print str(len(mylist)) + " " + mystring
-    elif ' ' in mystring:
+    elif ' ' in mystring and 'pub' in mystring:
         print unichr(9615) + "--------------------------------"
-        for item in mylist:
-            print unichr(8866) + unichr(10230) + "  Found " + item + " in " + mystring
+        if verbose:
+            for item in mylist:
+                print unichr(8866) + unichr(10230) + "  Found " + item + " in " + mystring
         print unichr(8866) + unichr(10230) + "  Found " + str(len(mylist)) + " in " + mystring
     else:
         print "---------------------------------"
-        for item in mylist:
-            print "Found " + item + " in " + mystring
+        if verbose:
+            for item in mylist:
+                print "Found " + item + " in " + mystring
         print "Found " + str(len(mylist)) + " in " + mystring
 
 ################################
@@ -45,9 +49,12 @@ _, spork_epub_w_fpid_list , spork_epub_dict = sporklib.get_fpid_list(WARN_DIR,ig
 _, spork_epub_ea_fpid_list , spork_epub_dict = sporklib.get_fpid_list(ERRA_DIR,ignore_dirs)
 _, spork_pdf_fpid_list , spork_pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
 _, spork_db_fpid_list , spork_db_dict = sporklib.get_fpid_list(DB_DIR,ignore_dirs)
+_, spork_cvr_fpid_list , spork_cvr_dict = sporklib.get_fpid_list(COVER_DIR,ignore_dirs)
 
 ################################
 
+cover_list = []
+notc_list = []
 epub_list = []
 epub_c_list = []
 epub_w_list = []
@@ -57,6 +64,11 @@ docb_list = []
 notf_list = []
 out_list = []
 for item in query_fpid_list:
+    if item in spork_cvr_fpid_list:
+        cover_list.append(item)
+    else:
+        notc_list.append(item)
+
     if item in spork_epub_fpid_list:
         epub_list.append(item)
 
@@ -77,13 +89,15 @@ for item in query_fpid_list:
         notf_list.append(item)
         out_list.append(item)
 
-summary(epub_list,'Epubs')
-summary(epub_c_list,'Clean Epubs')
-summary(epub_w_list,'Epubs w/ Warnings')
-summary(epub_ea_list,'Epubs w/ Acceptable Errors')
-summary(pdf_list,'Pdfs')
-summary(docb_list,'Docbooks')
-summary(notf_list,'Not Found')
+summary(epub_list,'Epubs',False)
+summary(epub_c_list,'Clean Epubs',False)
+summary(epub_w_list,'Epubs w/ Warnings',False)
+summary(epub_ea_list,'Epubs w/ Acceptable Errors',False)
+summary(pdf_list,'Pdfs',True)
+summary(docb_list,'Docbooks',True)
+summary(notf_list,'Books Not Found',False)
+summary(cover_list,'Covers',False)
+summary(notc_list,'Covers Not Found',False)
 print "---------------------------------"
 
 f = open('./fpid.list', 'w')
