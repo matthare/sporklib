@@ -61,8 +61,9 @@ for files in file_list:
     ext = raw_ext.lower()
 
     pixels, image_type = get_img_size(files)
-    
-    
+    if pixels > 1000000:
+        print files 
+
     if image_type  == 'JPEG' and ext == '.jpg':
        jpg_counter += 1
        

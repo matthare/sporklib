@@ -18,8 +18,10 @@ dbook_epub = []
 zip_epub = []
 largest = 0
 
+over_flow = 0
+under_flow = 0
 hmin = 0.0
-hmax = 350000000.0
+hmax = 450000000.0
 nbins = 100
 bin_size = (hmax-hmin)/nbins
 bin_center = bin_size/2
@@ -33,10 +35,16 @@ for files in path_list:
         fsize = os.path.getsize(files)
         if fsize > largest:
             largest = fsize
-            
-        bin_value = h[fsize,fsize+0.01].I 
-        bin_value += 1
-        h[fsize,fsize+0.01] = bin_value ,None
+
+        if fsize > hmax:
+            over_flow += 1
+            print files 
+        elif fsize <= hmin:
+            under_flow += 1
+        else:
+            bin_value = h[fsize,fsize+0.01].I 
+            bin_value += 1
+            h[fsize,fsize+0.01] = bin_value ,None
         
 print "Largest File Size = " + str(largest)
 hdata = h.I
@@ -45,6 +53,9 @@ for bins in hdata:
     counter += 1
     if bins != 0:
         print str((counter-1)*bin_size/1000000) + "Mb - " + str(counter*bin_size/1000000) + "Mb  = \t" + str(int(bins))
+
+counter += 1
+print str((counter-1)*bin_size/1000000) + "Mb - " + str(counter*bin_size/1000000) + "Mb  = \t" + str(int(over_flow))
 
 #print h
 #plot(h)

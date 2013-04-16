@@ -58,7 +58,7 @@ def deposit_ebooks(filename,trdname):
     conn = ftplib.FTP(DATASTORE, DATASTORE_USERNAME, DATASTORE_PASSWORD, '', 10)
     conn.set_debuglevel(1)
 
-    conn.cwd('heron')
+    conn.cwd('large')
 
     try:
         if os.path.exists(filename):

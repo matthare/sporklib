@@ -71,11 +71,11 @@ def find_ebooks(dirname,trdname):
     file_list = []
     dir_list = []
     for item in ftp_list:
-        filename = item.split(' ')[-1].strip()
-        #filename = ''
-        #for thing in item.rsplit()[8:]:
-        #    filename = filename + ' ' + thing
-        #filename = filename.strip()
+        #filename = item.split(' ')[-1].strip()
+        filename = ''
+        for thing in item.rsplit()[8:]:
+            filename = filename + ' ' + thing
+        filename = filename.strip()
         if item[0] == 'd' and filename[0] != '.': 
             dir_list.append("{}/{}".format(dirname,filename))
         elif item[0] == '-':
@@ -89,11 +89,11 @@ def find_ebooks(dirname,trdname):
         conn.retrlines('LIST {}'.format(drctry), ftp_list.append)
 
         for item in ftp_list:
-            filename = item.split(' ')[-1].strip()
-            #filename = ''
-            #for thing in item.rsplit()[8:]:
-            #    filename = filename + ' ' + thing
-            #filename = filename.strip()
+            #filename = item.split(' ')[-1].strip()
+            filename = ''
+            for thing in item.rsplit()[8:]:
+                filename = filename + ' ' + thing
+            filename = filename.strip()
             if item[0] == 'd' and filename[0] != '.': 
                 print "The Rabit Hole goes Deeper Still {}".format(dirname)
             elif item[0] == '-':
@@ -106,7 +106,6 @@ def find_ebooks(dirname,trdname):
 
     local_file_list = []
     for item in file_list:
-
         folders = item.split('/')
         if len(folders) == 3:
             if not os.path.exists(os.path.join('dbooks',folders[0],folders[1])):
@@ -138,7 +137,6 @@ def find_ebooks(dirname,trdname):
             print bcolors.OKBLUE + trdname + bcolors.ENDC + " Saving " + item + " as " + local_filename
             with open(local_filename, 'w') as f:
                 conn.retrbinary('RETR ' + item, lambda data: f.write(data))
-
         local_file_list.append(local_filename)
 
     with zipfile.ZipFile(os.path.join('dbooks','{}.zip'.format(dirname)),'w') as myzip:

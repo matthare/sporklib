@@ -6,8 +6,14 @@ BASE_DIR = "/home/content/uploaded/zips/docbooks"
 
 ignore_dirs = []
 ignore_dirs.append(os.path.join(BASE_DIR,'epubs'))
+ignore_dirs.append(os.path.join(BASE_DIR,'epubs/epub_dbook'))
+ignore_dirs.append(os.path.join(BASE_DIR,'epubs/epub_pdf_dbook'))
 ignore_dirs.append(os.path.join(BASE_DIR,'pdfs'))
+ignore_dirs.append(os.path.join(BASE_DIR,'pdfs/epub_dbook'))
+ignore_dirs.append(os.path.join(BASE_DIR,'pdfs/epub_pdf_dbook'))
 ignore_dirs.append(os.path.join(BASE_DIR,'dbs'))
+ignore_dirs.append(os.path.join(BASE_DIR,'dbs/epub_dbook'))
+ignore_dirs.append(os.path.join(BASE_DIR,'dbs/epub_pdf_dbook'))
 
 dir_list = []
 file_list = []
