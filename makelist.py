@@ -28,8 +28,8 @@ def print_summary(classic_fpid_list,spork_fpid_list,classic_dict,spork_dict):
     print str(classic_ctr) + " are newer on Classic"
     print str(len(in_classic_not_spork)) + " FPIDs Unique to Classic"
     print str(len(in_spork_not_classic)) + " FPIDs Unique to Spork"
-#    for item in in_classic_not_spork:
-#        print item
+    for item in in_classic_not_spork:
+        print item
 
 
 ################################
@@ -105,9 +105,9 @@ print "--------- BvD ----------"
 print len(classic_fpid_list)
 print "------- Summary --------"
 print_summary(classic_fpid_list,spork_list,classic_dict,spork_dict)
-print "------- Epub Summary --------"
-print_summary(classic_fpid_list,spork_epub_fpid_list,classic_dict,spork_epub_dict)
-print "------- Pdf Summary --------"
-print_summary(classic_fpid_list,spork_pdf_fpid_list,classic_dict,spork_pdf_dict)
-print "------- DocBook Summary --------"
-print_summary(classic_fpid_list,spork_db_fpid_list,classic_dict,spork_db_dict)
+#print "------- Epub Summary --------"
+#print_summary(classic_fpid_list,spork_epub_fpid_list,classic_dict,spork_epub_dict)
+#print "------- Pdf Summary --------"
+#print_summary(classic_fpid_list,spork_pdf_fpid_list,classic_dict,spork_pdf_dict)
+#print "------- DocBook Summary --------"
+#print_summary(classic_fpid_list,spork_db_fpid_list,classic_dict,spork_db_dict)

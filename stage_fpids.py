@@ -41,11 +41,17 @@ for item in query_fpid_list:
     files = [x for x in path_list if item in x]
     counter += 1
     sub_counter = 0
+    upload = False
     for file1 in files:
-        sub_counter += 1
-        file2 = os.path.join(STAGE_DIR,os.path.split(file1)[1])
-        if os.path.exists(file2):
-            print "Already have " + file2                                                                                                                                       
-        else:                                                                                                                                                                    
-            print "{}.{} Copying {} to {}".format(counter,sub_counter,file1,file2)                                                                                                 
-            shutil.copy(file1,file2)                    
+        if file1.endswith('.epub'):
+            upload = True
+
+    if upload:
+        for file1 in files:
+            sub_counter += 1
+            file2 = os.path.join(STAGE_DIR,os.path.split(file1)[1])
+            if os.path.exists(file2):
+                print "Already have " + file2                                                                                                                                       
+            else:                                                                                                                                                                    
+                print "{}.{} Copying {} to {}".format(counter,sub_counter,file1,file2)                                                                                                 
+                shutil.copy(file1,file2)                    

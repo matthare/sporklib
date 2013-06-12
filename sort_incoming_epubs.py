@@ -55,11 +55,11 @@ for fpid in in_all_set:
         if filecmp.cmp(file1,file2):
             file3 = os.path.join('/home/content/uploaded/duplicates',file_name)
             print "Moving Dup1 " + file1 + " to " + file3
-            #shutil.move(file1,file3)
+            shutil.move(file1,file3)
         else:
             file3 = os.path.join(EPUB_DIR,file_name)
             print "Moving New1 " + file1 + " to " + file3
-            #shutil.move(file1,file3)
+            shutil.move(file1,file3)
     else:
         print file1
         print file2
@@ -75,7 +75,7 @@ for fpid in in_doc_and_pdf_only_set:
     if file1 != "ERROR2a":
         file2 = os.path.join(EPUB_DIR,file_name)
         print "Moving New2 " + file1 + " to " + file2
-        #shutil.move(file1,file2)
+        shutil.move(file1,file2)
     else:
         print file1
 
@@ -102,11 +102,11 @@ for fpid in in_doc_and_epub_only_set:
         if filecmp.cmp(file1,file2):
             file3 = os.path.join('/home/content/uploaded/duplicates',file_name)
             print "Moving Dup3 " + file1 + " to " + file3
-            #shutil.move(file1,file3)
+            shutil.move(file1,file3)
         else:
             file3 = os.path.join(EPUB_DIR,file_name)
             print "Moving New3 " + file1 + " to " + file3
-            #shutil.move(file1,file3)
+            shutil.move(file1,file3)
     else:
         print file1
         print file2
@@ -122,7 +122,7 @@ for fpid in unique_set:
     if file1 != "ERROR4a":
         file2 = os.path.join(EPUB_DIR,file_name)
         print "Moving New4 " + file1 + " to " + file2
-        #shutil.move(file1,file2)
+        shutil.move(file1,file2)
     else:
         print file1
 

@@ -52,7 +52,7 @@ if os.path.exists(SKIPFILES):
 # Set this up for appending
 skipfile_names = open(SKIPFILES, 'a', 0) # write the skipfiles unbuffered
 
-URL = 'http://techbus.safaribooksonline.com/xmlapi/?id='
+URL = 'http://techbus.safaribooksonline.com/xmlapi/?md=1&returnPFPages=1&getInternalIds=1&id='
 
 def make_xml(fpid,trdname):
     xml_url = "{}{}".format(URL,fpid)

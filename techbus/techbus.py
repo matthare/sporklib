@@ -20,42 +20,38 @@ if os.path.exists(SKIPFILE):
 skipfile_names = open(SKIPFILE, 'a', 0) # write the skipfiles unbuffered
 
 user_list = []
-#user_list.append(('Hiroflare@yahoo.com','my.safaribooksonline.com'))
-#user_list.append(('happyflare@yahoo.com','creativeedge.com'))
-#user_list.append(('cedge@cedge.com','creativeedge.com'))
-
-#user_list.append(('LeannB2CLibrary@email.com','techbus.safaribooksonline.com'))
-#user_list.append(('lksOreillyLib@safaritest.com','techbus.safaribooksonline.com'))
-#user_list.append(('lksIBMPressBk@safaritest.com','techbus.safaribooksonline.com'))
-#user_list.append(('lksAdobePressBK@email.com','techbus.safaribooksonline.com'))
-#user_list.append(('lksmuibk@safaritest.com','techbus.safaribooksonline.com'))
-
-#user_list.append(('AdobePressCE@safaritest.com','creativeedge.com'))
-#user_list.append(('LeannAnnCE@safaritest.com','creativeedge.com'))
-#user_list.append(('lksmuiCE@safaritest.com','creativeedge.com'))
-
-#user_list.append(('PruFlare@gmail.com','techbus.safaribooksonline.com'))
-#user_list.append(('PassFlare@email.com','techbus.safaribooksonline.com'))
-#user_list.append(('FrankiFlare@gmail.com','techbus.safaribooksonline.com'))
-#user_list.append(('tikiflare@yahoo.com','techbus.safaribooksonline.com'))
-
-#user_list.append(('burtmanb2c10yearly@email.com','my.safaribooksonline.com'))
-#user_list.append(('burtmanb2c@email.com','my.safaribooksonline.com'))
-
-#user_list.append(('jefflib@my.com','my.safaribooksonline.com'))
-#user_list.append(('jefflib@techbus.com','techbus.safaribooksonline.com'))
-
-#user_list.append(('jvbSL123@oreilly.com','my.safaribooksonline.com'))
-#user_list.append(('jvbSL@peachpit.com','my.safaribooksonline.com'))
 #user_list.append(('jvbSL@techbus.com','techbus.safaribooksonline.com'))
-#user_list.append(('jvbSL@proquestcombo.com','techbus.safaribooksonline.com'))
-
+user_list.append(('mhare01@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare02@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare03@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare04@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare05@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare06@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare07@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare08@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare09@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare10@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare11@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare12@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare13@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare14@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare15@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare16@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare17@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare18@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare19@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare20@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare21@safaritest.com','safarirel6.bvdep.com'))
+user_list.append(('mhare22@safaritest.com','safarirel6.bvdep.com'))
 user_list.append(('mhare1@safaritest.com','techbus.safaribooksonline.com'))
 user_list.append(('mhare2@safaritest.com','techbus.safaribooksonline.com'))
 user_list.append(('mhare3@safaritest.com','techbus.safaribooksonline.com'))
+
 PWORD = 'test123'
 
-query_fpid_list = sporklib.get_query_list('imagesneeded20130404.txt')
+query_fpid_list = list(set(sporklib.get_query_list('imagesneeded20130507.txt')))
+print len(query_fpid_list)
+exit
 for fpid in KNOWN_SKIPFILES:
     query_fpid_list.remove(fpid)
 

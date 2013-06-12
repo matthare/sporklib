@@ -79,10 +79,10 @@ for item in query_fpid_list:
     elif item in spork_epub_ea_fpid_list:
         epub_ea_list.append(item)
 
-    elif item in spork_pdf_fpid_list:
+    if item in spork_pdf_fpid_list:
         pdf_list.append(item)
         out_list.append(item)
-    elif item in spork_db_fpid_list:
+    if item in spork_db_fpid_list:
         docb_list.append(item)
         out_list.append(item)
     else:

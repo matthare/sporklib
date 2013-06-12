@@ -48,6 +48,8 @@ for files in file_list:
 
           if 'I/O error' in output:
              file2 = os.path.join(REJECT_DIR,raw_name)
+          if 'image file' in output and 'is missing' in output:
+             file2 = os.path.join(REJECT_DIR,raw_name)
           elif 'Cannot read' in output:
              file2 = os.path.join(REJECT_DIR,raw_name)
           elif 'invalid LOC' in output:
@@ -77,6 +79,9 @@ for files in file_list:
           if filecmp.cmp(files,file2):
              print "But both are the same, moving {} to Duplicates".format(files)
              file2 = os.path.join(DUP_DIR,raw_name)
+             shutil.move(files,file2)
+          else:
+             print "Moving File " + files + " to " + file2
              shutil.move(files,file2)
        else:
           print "Moving File " + files + " to " + file2
