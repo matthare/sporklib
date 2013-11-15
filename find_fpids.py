@@ -7,6 +7,7 @@ EPUB_DIR = "/home/content/uploaded/epubs"
 CLEAN_DIR = "/home/content/uploaded/epubs/clean"
 WARN_DIR = "/home/content/uploaded/epubs/warning"
 ERRA_DIR = "/home/content/uploaded/epubs/error/accept"
+VIDEO_DIR = "/home/content/uploaded/epubs/videos"
 PDF_DIR = "/home/content/uploaded/pdfs"
 COVER_DIR = "/home/content/uploaded/covers"
 DB_DIR = "/home/content/uploaded/zips/docbooks"
@@ -47,6 +48,7 @@ _, spork_epub_fpid_list , spork_epub_dict = sporklib.get_fpid_list(EPUB_DIR,igno
 _, spork_epub_c_fpid_list , spork_epub_dict = sporklib.get_fpid_list(CLEAN_DIR,ignore_dirs)
 _, spork_epub_w_fpid_list , spork_epub_dict = sporklib.get_fpid_list(WARN_DIR,ignore_dirs)
 _, spork_epub_ea_fpid_list , spork_epub_dict = sporklib.get_fpid_list(ERRA_DIR,ignore_dirs)
+_, spork_epub_v_fpid_list , spork_epub_dict = sporklib.get_fpid_list(VIDEO_DIR,ignore_dirs)
 _, spork_pdf_fpid_list , spork_pdf_dict = sporklib.get_fpid_list(PDF_DIR,ignore_dirs)
 _, spork_db_fpid_list , spork_db_dict = sporklib.get_fpid_list(DB_DIR,ignore_dirs)
 _, spork_cvr_fpid_list , spork_cvr_dict = sporklib.get_fpid_list(COVER_DIR,ignore_dirs)
@@ -59,6 +61,7 @@ epub_list = []
 epub_c_list = []
 epub_w_list = []
 epub_ea_list = []
+epub_v_list = []
 pdf_list = []
 docb_list = []
 notf_list = []
@@ -78,11 +81,13 @@ for item in query_fpid_list:
         epub_w_list.append(item)
     elif item in spork_epub_ea_fpid_list:
         epub_ea_list.append(item)
+    elif item in spork_epub_v_fpid_list:
+        epub_v_list.append(item)
 
-    if item in spork_pdf_fpid_list:
+    elif item in spork_pdf_fpid_list:
         pdf_list.append(item)
         out_list.append(item)
-    if item in spork_db_fpid_list:
+    elif item in spork_db_fpid_list:
         docb_list.append(item)
         out_list.append(item)
     else:
@@ -90,12 +95,13 @@ for item in query_fpid_list:
         out_list.append(item)
 
 summary(epub_list,'Epubs',False)
-summary(epub_c_list,'Clean Epubs',False)
-summary(epub_w_list,'Epubs w/ Warnings',False)
-summary(epub_ea_list,'Epubs w/ Acceptable Errors',False)
+summary(epub_c_list,'Clean Epubs',True)
+summary(epub_w_list,'Epubs w/ Warnings',True)
+summary(epub_ea_list,'Epubs w/ Acceptable Errors',True)
+summary(epub_v_list,'Video Epubs',False)
 summary(pdf_list,'Pdfs',True)
 summary(docb_list,'Docbooks',True)
-summary(notf_list,'Books Not Found',False)
+summary(notf_list,'Books Not Found',True)
 summary(cover_list,'Covers',False)
 summary(notc_list,'Covers Not Found',False)
 print "---------------------------------"

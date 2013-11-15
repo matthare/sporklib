@@ -42,8 +42,13 @@ log.setLevel(logging.INFO)
 OUTFILE_NAME = os.path.join('xmls', 'datastore_audit.csv')
 outfile = csv.writer(open(OUTFILE_NAME, 'a'))
 
+RETIREDFILE = 'retired_fpids.skip'
 SKIPFILES = 'mtgetxmls.skip'
 KNOWN_SKIPFILES = set()
+
+if os.path.exists(RETIREDFILE):
+    for line in open(RETIREDFILE, 'r'):
+        KNOWN_SKIPFILES.add(line.strip())
 
 if os.path.exists(SKIPFILES):
     for line in open(SKIPFILES, 'r'):
@@ -53,6 +58,7 @@ if os.path.exists(SKIPFILES):
 skipfile_names = open(SKIPFILES, 'a', 0) # write the skipfiles unbuffered
 
 URL = 'http://techbus.safaribooksonline.com/xmlapi/?md=1&returnPFPages=1&getInternalIds=1&id='
+#URL = 'http://bowindex5.bvdep.com/xmlapi?md=1&returnPFPages=1&getInternalIds=1&id='
 
 def make_xml(fpid,trdname):
     xml_url = "{}{}".format(URL,fpid)

@@ -43,7 +43,7 @@ DATASTORE_PASSWORD = 'TRud4Ubr'
 OUTFILE_NAME = os.path.join('out', 'datastore_audit.csv')
 outfile = csv.writer(open(OUTFILE_NAME, 'a'))
 
-SKIPFILES = 'skipfiles.txt'
+SKIPFILES = 'mtputfiles.skip'
 KNOWN_SKIPFILES = set()
 
 if os.path.exists(SKIPFILES):
@@ -58,18 +58,34 @@ def deposit_ebooks(filename,trdname):
     conn = ftplib.FTP(DATASTORE, DATASTORE_USERNAME, DATASTORE_PASSWORD, '', 10)
     conn.set_debuglevel(1)
 
-    conn.cwd('heron')
+#    base_dir = 'magpie'
+#    base_dir = 'heron'
+    base_dir = 'videos'
+#    base_dir = 'legacy'
+    try:
+        conn.cwd(base_dir)
+    except Exception:
+        conn.mkd(base_dir)
+        conn.cwd(base_dir)
 
     try:
         if os.path.exists(filename):
             fname = os.path.split(filename)[1]
+            fpid = os.path.splitext(fname)[0]
             print bcolors.OKBLUE + trdname + bcolors.ENDC + " Uploading " + filename + " as " + fname 
+            
+            try:
+                conn.cwd(fpid)
+            except Exception:
+                conn.mkd(fpid)
+                conn.cwd(fpid)
+
             conn.storbinary('STOR ' + fname, open(filename, 'r'))
         else:
             print bcolors.FAIL + trdname + bcolors.ENDC + " File " + filename + " does not exists!"
         skipfile_names.write(filename + "\n")
         conn.close()
-    except:
+    except Exception:
         print bcolors.FAIL + trdname + bcolors.ENDC + " Transfer Failed " + file_name
         conn.close()
 
@@ -110,6 +126,7 @@ def get_file_list():
     file_list = []
     for dirpath, dirnames, filenames in os.walk(BASE_DIR):
         for files in filenames:
+#            if files.endswith('.xml'):
             file_list.append(os.path.join(dirpath,files))
     return file_list
 

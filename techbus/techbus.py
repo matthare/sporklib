@@ -49,7 +49,7 @@ user_list.append(('mhare3@safaritest.com','techbus.safaribooksonline.com'))
 
 PWORD = 'test123'
 
-query_fpid_list = list(set(sporklib.get_query_list('imagesneeded20130507.txt')))
+query_fpid_list = list(set(sporklib.get_query_list('imagesneeded20131014.txt')))
 print len(query_fpid_list)
 exit
 for fpid in KNOWN_SKIPFILES:

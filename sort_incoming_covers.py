@@ -59,7 +59,7 @@ for item in unique_list:
         
         if not os.path.exists(file2):
             print "Moving New file " + file1 + " to " + file2
-            #shutil.move(file1,file2)
+            shutil.move(file1,file2)
         else:
             print "ERROR A file " + file_name + " already exists in " + COVER_DIR
 
@@ -79,13 +79,13 @@ for item in common_list2:
         if os.path.exists(file2) and os.path.exists(file1):
             if filecmp.cmp(file1,file2):
                 print "Moving Dup file " + file1 + " to " + file3
-                #shutil.move(file1,file3)
+                shutil.move(file1,file3)
             elif fsize1 > fsize2:
                 print "Moving Larger file " + file1 + " to " + file2
-                #shutil.move(file1,file2)
+                shutil.move(file1,file2)
             else:
                 print "Original File  " + file2 + " is being kept."
-                #os.remove(file1)
+                os.remove(file1)
         else:
             print "ERROR A file " + file_name + " does not exist in " + COVER_DIR
             

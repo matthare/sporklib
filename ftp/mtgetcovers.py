@@ -47,7 +47,7 @@ DATASTORE_PASSWORD = '91Jt683a'
 OUTFILE_NAME = os.path.join('covers', 'datastore_cover_audit.csv')
 outfile = csv.writer(open(OUTFILE_NAME, 'a'))
 
-SKIPFILES = 'skipcoverids.txt'
+SKIPFILES = 'mtgetcovers.skip'
 KNOWN_SKIPFILES = set()
 
 if os.path.exists(SKIPFILES):
@@ -65,9 +65,9 @@ def find_ebooks(dirname,trdname):
     conn.retrlines('LIST %s' % dirname, ftp_list.append)
     found_match = False
     
-    #file_type = '.jpg'
+    file_type = '.jpg'
     #file_type = '.png'
-    file_type = '.gif'
+    #file_type = '.gif'
 
     file_list = []
     for item in ftp_list:

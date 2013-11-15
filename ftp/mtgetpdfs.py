@@ -47,7 +47,7 @@ DATASTORE_PASSWORD = '91Jt683a'
 OUTFILE_NAME = os.path.join('pdfs', 'datastore_pdf_audit.csv')
 outfile = csv.writer(open(OUTFILE_NAME, 'a'))
 
-SKIPFILES = 'skippdfids.txt'
+SKIPFILES = 'mtgetpdfs.skip'
 KNOWN_SKIPFILES = set()
 
 if os.path.exists(SKIPFILES):

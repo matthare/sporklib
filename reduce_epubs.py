@@ -21,7 +21,6 @@ warn_list , warn_path_list = make_lists(WARN_DIR)
 erra_list , erra_path_list = make_lists(ERRA_DIR)
 errr_list , errr_path_list = make_lists(ERRR_DIR)
 
-
 print len(clean_list)
 print len(warn_list)
 print len(erra_list)
@@ -43,7 +42,7 @@ for item in erra_path_list:
     file_name = os.path.split(item)[1]
     if file_name in clean_list:
         print "D " + item
-        #os.remove(item)
+        os.remove(item)
     elif file_name in warn_list:
         print "E " + item
         #os.remove(item)
@@ -52,7 +51,7 @@ for item in warn_path_list:
     file_name = os.path.split(item)[1]
     if file_name in clean_list:
         print "F " + item
-        #os.remove(item)
+        os.remove(item)
 
 
 f = open('./epub_clean.list', 'w')

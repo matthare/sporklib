@@ -128,7 +128,7 @@ for fpid in unique_set:
     if file1 != "ERROR4a":
         file2 = os.path.join(PDF_DIR,file_name)
         print "Moving New4 " + file1 + " to " + file2
-        #shutil.move(file1,file2)
+        shutil.move(file1,file2)
     else:
         print file1
 

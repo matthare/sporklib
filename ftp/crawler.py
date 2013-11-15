@@ -43,7 +43,7 @@ DATASTORE = 'ftp.bvdep.com'
 DATASTORE_USERNAME = 'safaridatastore'
 DATASTORE_PASSWORD = '91Jt683a'
 
-RETIREDFILE = 'retired_fpid.skip'
+RETIREDFILE = 'retired_fpids.skip'
 SKIPFILE = 'datastore_date_audit.skip'
 KNOWN_SKIPFILES = set()
 

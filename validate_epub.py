@@ -4,6 +4,7 @@ import os, filecmp, shutil, time
 import subprocess
 
 BASE_DIR = "/home/content/uploaded/epubs"
+VIDEO_DIR = "/home/content/uploaded/epubs/video"
 REJECT_DIR = "/home/content/uploaded/epubs/error/reject"
 ACCEPT_DIR = "/home/content/uploaded/epubs/error/accept"
 WARNING_DIR = "/home/content/uploaded/epubs/warning"
@@ -13,6 +14,7 @@ DUP_DIR = "/home/content/uploaded/duplicates"
 ignore_dirs = []
 ignore_dirs.append(os.path.join(BASE_DIR,'clean'))
 ignore_dirs.append(os.path.join(BASE_DIR,'warning'))
+ignore_dirs.append(os.path.join(BASE_DIR,'video'))
 ignore_dirs.append(os.path.join(BASE_DIR,'error'))
 ignore_dirs.append(os.path.join(BASE_DIR,'error/accept'))
 ignore_dirs.append(os.path.join(BASE_DIR,'error/reject'))

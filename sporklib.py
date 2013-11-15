@@ -25,11 +25,20 @@ def get_fpid_list(base_dir,ignore_dirs):
 
 
 def get_query_list(file_name = './querylist.txt'): 
+
+    RETIREDFILE = 'retired_fpids.skip'
+    KNOWN_SKIPFILES = set()
+
+    if os.path.exists(RETIREDFILE):
+        for line in open(RETIREDFILE, 'r'):
+            KNOWN_SKIPFILES.add(line.strip())
+
     f = open(file_name, 'r')
     fpid_list = []
     for line in f:
         new_line = line.rstrip()
-        fpid_list.append(new_line)
+        if new_line not in KNOWN_SKIPFILES:
+            fpid_list.append(new_line)
     f.close()
     fpid_list.sort()
     return fpid_list
